@@ -1,0 +1,15 @@
+version: '3'
+services:
+  client:
+    build: "./client"
+    environment:
+      - ZMQ_ADDRESS=tcp://device:5559
+  device:
+    build: "./device"
+    environment:
+      - ZMQ_CLIENT_ADDRESS=tcp://*:5559
+      - ZMQ_SERVER_ADDRESS=tcp://*:5560
+  server:
+      build: "./server"
+      environment:
+        - ZMQ_ADDRESS=tcp://device:5560
